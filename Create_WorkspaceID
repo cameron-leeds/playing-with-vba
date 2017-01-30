@@ -1,0 +1,26 @@
+Sub Worksheet_SelectionChange(ByVal Target As Range)
+If Not Intersect(Target, Range("A1:a10")) Is Nothing Then
+     If Len(Target) <= 9 And Len(Target) >= 2 Then
+     MsgBox " Length of string is " & Len(Target)
+     Target.Font.Bold = True
+     End If
+End If
+End Sub
+Sub workspaceid()
+'
+' workspaceid Macro
+'
+'
+    Columns("D:D").Select
+    Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+    Range("D1").Select
+    ActiveCell.FormulaR1C1 = "Workspace ID"
+    Range("D2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=IF(RC[-2]="""","""",CONCATENATE(RC[-1],"":"",RC[-2]))"
+    Range("D2").Select
+    Selection.AutoFill Destination:=Range("D2:D10")
+    Range("D2:D10").Select
+    Range("D2").Select
+    ActiveWorkbook.save
+End Sub
